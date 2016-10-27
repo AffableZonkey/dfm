@@ -2,7 +2,6 @@ package dfm
 
 import (
 	"fmt"
-	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
@@ -37,7 +36,7 @@ func Add(c *cli.Context) error {
 			return cli.NewExitError(err.Error(), 1)
 		}
 
-		err = os.Link(newFile, file)
+		err = FS.Link(newFile, file)
 		if err != nil {
 			return cli.NewExitError(err.Error(), 1)
 		}
@@ -63,5 +62,5 @@ func Add(c *cli.Context) error {
 }
 
 func move(oldfile, newfile string) error {
-	return os.Rename(oldfile, newfile)
+	return FS.Rename(oldfile, newfile)
 }
