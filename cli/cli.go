@@ -53,13 +53,9 @@ func BuildApp() *cli.App {
 			Usage:   "Create a dotfiles profile from a git repo.",
 			Action:  dfm.Clone,
 			Flags: []cli.Flag{
-				cli.StringFlag{
-					Name:  "alias, a",
-					Usage: "Creates `ALIAS` for the profile instead of username",
-				},
 				cli.BoolFlag{
 					Name:  "overwrite, o",
-					Usage: "Overwrites existing files when creating links.",
+					Usage: "Overwrites existing files when creating links. Only has an effect if --link is also provided.",
 				},
 				cli.BoolFlag{
 					Name:  "link, l",
