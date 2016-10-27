@@ -4,6 +4,9 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/chasinglogic/dfm"
+	"github.com/chasinglogic/dfm/cli"
 )
 
 func testFilesExistence(files ...string) (string, bool) {
@@ -29,8 +32,8 @@ func testCommand(args ...string) (error, string) {
 		return e, ""
 	}
 
-	app := buildApp()
-	profileDir := filepath.Join(defaultConfigDir(), "profiles", "chasinglogic")
+	app := cli.BuildApp()
+	profileDir := filepath.Join(dfm.DefaultConfigDir(), "profiles", "chasinglogic")
 	return app.Run(append([]string{"dfm"}, args...)), profileDir
 }
 
