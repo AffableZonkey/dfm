@@ -20,7 +20,7 @@ func Remove(c *cli.Context) error {
 	userDir := filepath.Join(getProfileDir(), profile)
 	links := GenerateSymlinks(userDir, os.Getenv("HOME"))
 
-	rmerr := os.RemoveAll(userDir)
+	rmerr := FS.RemoveAll(userDir)
 	if rmerr != nil {
 		return rmerr
 	}
@@ -69,7 +69,7 @@ func GenerateSymlinks(profileDir, target string) *[]LinkInfo {
 func RemoveSymlinks(l *[]LinkInfo, username string) error {
 	for _, link := range *l {
 		// Check if the link is still valid after removing the profile, and if
-		if path, err := os.Readlink(link.Dest); err != nil ||
+		if path, err := FS.Readlink(link.Dest); err != nil ||
 			strings.Contains(path, username) {
 
 			if DRYRUN || CONFIG.Verbose {
@@ -77,7 +77,7 @@ func RemoveSymlinks(l *[]LinkInfo, username string) error {
 			}
 
 			if !DRYRUN {
-				if err := os.Remove(link.Dest); err != nil {
+				if err := FS.Remove(link.Dest); err != nil {
 					return err
 				}
 			}

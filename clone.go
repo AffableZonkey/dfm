@@ -2,7 +2,6 @@ package dfm
 
 import (
 	"fmt"
-	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
@@ -27,7 +26,7 @@ func Clone(c *cli.Context) error {
 
 	// Just create a symlink in configDir/profiles/ to the other profile name
 	if aliasDir != "" {
-		if err := os.Symlink(userDir, aliasDir); err != nil {
+		if err := FS.Symlink(userDir, aliasDir); err != nil {
 			fmt.Println("Error creating alias", err, "skipping...")
 		}
 	}

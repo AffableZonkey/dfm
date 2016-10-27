@@ -65,14 +65,14 @@ func GenerateSymlink(sourceDir, targetDir string, file os.FileInfo) *LinkInfo {
 // removeIfNeeded will check if the link destination exists and delete it if
 // appropriate.
 func removeIfNeeded(link *LinkInfo, overwrite bool) error {
-	if info, err := os.Lstat(link.Dest); err == nil &&
+	if info, err := FS.Lstat(link.Dest); err == nil &&
 		(overwrite || info.Mode()&os.ModeSymlink == os.ModeSymlink) {
 		if CONFIG.Verbose || DRYRUN {
 			fmt.Printf("%s already exists, removing.\n", link.Dest)
 		}
 
 		if !DRYRUN {
-			if rmerr := os.Remove(link.Dest); rmerr != nil {
+			if rmerr := FS.Remove(link.Dest); rmerr != nil {
 				return fmt.Errorf("Unable to remove %s: %s",
 					link.Dest,
 					rmerr.Error())
@@ -129,7 +129,7 @@ func CreateSymlinks(sourceDir, targetDir string, overwrite bool) error {
 		}
 
 		if !DRYRUN {
-			if err := os.Symlink(link.Src, link.Dest); err != nil {
+			if err := FS.Symlink(link.Src, link.Dest); err != nil {
 				fmt.Println(err)
 			}
 		}

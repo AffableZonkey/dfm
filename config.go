@@ -19,7 +19,7 @@ type Config struct {
 // LoadConfig runs as a hook when dfm runs to load the config object from
 // ~/.dfm
 func LoadConfig(c *cli.Context) error {
-	configJSON, rerr := ioutil.ReadFile(filepath.Join(os.Getenv("HOME"), ".dfm"))
+	configJSON, rerr := FS.ReadFile(filepath.Join(os.Getenv("HOME"), ".dfm"))
 	if rerr == os.ErrNotExist {
 		configJSON = []byte("{\"CurrentProfile\":false}")
 	} else if rerr != nil {
