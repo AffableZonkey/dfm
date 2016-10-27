@@ -8,8 +8,8 @@ import (
 	"github.com/chasinglogic/dfm"
 )
 
-// Added this to make testing easier.
-func buildApp() *cli.App {
+// BuildApp is a factory method to make testing easier.
+func BuildApp() *cli.App {
 	app := cli.NewApp()
 	app.Name = "dfm"
 	app.Usage = "Manage dotfiles."
@@ -137,7 +137,7 @@ func buildApp() *cli.App {
 
 // Run is the entry point for the app
 func Run() int {
-	a := buildApp()
+	a := BuildApp()
 	a.Run(os.Args)
 	return 0
 }
